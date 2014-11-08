@@ -546,9 +546,10 @@ function ($compile, $parse, $document, $position, dateFilter, dateParser, datepi
 
       // Outter change
       ngModel.$render = function() {
-        var date = ngModel.$viewValue ? dateFilter(ngModel.$viewValue, dateFormat) : '';
-        element.val(date);
-        scope.date = parseDate( ngModel.$modelValue );
+        var date = ngModel.$viewValue ? parseDate(ngModel.$viewValue) : null;
+        var display = date ? dateFilter(date, dateFormat) : '';
+        element.val(display);
+        scope.date = date;
       };
 
       var documentClickBind = function(event) {
